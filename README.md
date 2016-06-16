@@ -9,3 +9,8 @@ Convert back and forth between tab-delimited files (extension agnostic) and MS E
 
 - **excel2tsv.pl**
 - **tsv2excel.pl**
+
+---
+
+- **calc_all_pairwise_combinations.py** - Given a file of line-by-line identifiers (or first column identifiers in tab-delimited file), all unique pairwise comparisons will be listed excluding self-vs-self.
+ - this example should list 52 pairs: `python calc_all_pairwise_combinations.py examples/list.txt | sort -k1,2 | grep -v 'self-to-self'`
