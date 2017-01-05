@@ -1,11 +1,14 @@
 #!/bin/bash
 
 
+[ -z $BRANCH_HOME ] && echo 'ERROR: $BRANCH_HOME path not set'
+
+
 # Update my own HOME dir first
-repos=( genomics_scripts phylogenetics_scripts AR_Bank_scripts summarize_kraken_data c-SSTAR )
+repos=( genomics_scripts phylogenetics_scripts AR_Bank_scripts summarize_kraken_data scripts c-SSTAR )
 for repo in "${repos[@]}"; do
     cd $HOME/$repo
-    #git pull git@github.com:chrisgulvik/$repo.git
+    git pull git@github.com:chrisgulvik/$repo.git
 done
 
 # Update BRANCH share from HOME dir scripts
