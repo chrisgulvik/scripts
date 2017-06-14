@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-[ -z $BRANCH_HOME ] && echo 'ERROR: $BRANCH_HOME path not set'
+[ -z $LAB_HOME ] && echo 'ERROR: $LAB_HOME path not set'
 
 
 # Update my own HOME dir first
@@ -11,21 +11,21 @@ for repo in "${repos[@]}"; do
     git pull git@github.com:chrisgulvik/$repo.git
 done
 
-# Update BRANCH share from HOME dir scripts
+# Update LAB share from HOME dir scripts
 repos=( "${repos[@]/#/$HOME/}" )
 shopt -s nullglob
 repos=( "${repos[@]/%//*}" )
 for f in ${repos[@]}; do
     if [[ -f $f && $f != *.md ]]; then
         b=$(basename $f)
-        cp -fv $f $BRANCH_HOME/.bin/$b
+        cp -fv $f $LAB_HOME/.bin/$b
     elif [[ -d $f ]]; then
         for j in $f/*; do
             if [[ -f $j ]]; then
                 k=$(basename $j)
-                cp -rfv $j $BRANCH_HOME/.lib/$k
+                cp -rfv $j $LAB_HOME/.lib/$k
                 if [[ $k == *.gz ]]; then
-                    gunzip -f $BRANCH_HOME/.lib/$k
+                    gunzip -f $LAB_HOME/.lib/$k
                 fi
             fi
         done
