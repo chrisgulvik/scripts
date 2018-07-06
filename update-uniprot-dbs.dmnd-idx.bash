@@ -14,8 +14,12 @@ source /etc/profile.d/modules.sh
 module load diamond/0.9.10
 cd "$LAB_HOME"/.lib
 for DB in $SWISSPROT $TREMBL ; do
+  MD5_before=$( md5sum "$DB" 2> /dev/null )
   wget --timestamping "$DB"
-  diamond makedb --in "$LAB_HOME"/.lib/`basename $DB` \
-   --db "$LAB_HOME"/.lib/`basename $DB .fasta.gz`.dmnd
+  MD5_after=$( md5sum "$DB" 2> /dev/null )
+  if [ "$MD5_before" != "$MD5_after" ]; then
+    diamond makedb --in "$LAB_HOME"/.lib/`basename $DB` \
+     --db "$LAB_HOME"/.lib/`basename $DB .fasta.gz`.dmnd
+  fi
 done
 module unload diamond/0.9.10
