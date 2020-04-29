@@ -69,7 +69,7 @@ def main():
 				ofh.write('{}\n'.format(ln))
 	else:
 		for ln in o:
-			print ln
+			print(ln)
 
 if __name__ == '__main__':
 	main()
